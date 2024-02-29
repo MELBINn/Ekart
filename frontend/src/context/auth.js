@@ -6,6 +6,7 @@ const AuthProvider = ({ children }) => {
   const [auth, setAuth] = useState({
     user: null,
     token: "",
+    userId: "",
   });
 
   //default axios
@@ -19,6 +20,7 @@ const AuthProvider = ({ children }) => {
         ...auth,
         user: parseData.user,
         token: parseData.token,
+        userId: parseData._id,
       });
     }
     //eslint-disable-next-line

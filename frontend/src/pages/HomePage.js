@@ -18,7 +18,7 @@ const HomePage = () => {
   const [total, setTotal] = useState(0);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
-  const [auth, setAuth] = useAuth();
+  const [auth] = useAuth();
 
   //get all category
   const getAllCategory = async () => {
@@ -109,6 +109,8 @@ const HomePage = () => {
   };
   const AddToCart = (productId)=>{
     console.log(productId)
+    console.log(auth._userId);
+    console.log(auth.user)
   }
   return (
     <Layout title={"ALl Products - Best offers "}>

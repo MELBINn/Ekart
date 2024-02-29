@@ -28,8 +28,14 @@ const Login = () => {
           ...auth,
           user: res.data.user,
           token: res.data.token,
+          userId: res.data.userId,
         });
-        localStorage.setItem("auth", JSON.stringify(res.data));
+        // localStorage.setItem("auth", JSON.stringify(res.data));
+        localStorage.setItem("auth", JSON.stringify({
+          userId: res.data.userId,
+          token: res.data.token,
+          user: res.data.user,
+        }));
         navigate(location.state || "/");
       } else {
         toast.error(res.data.message);
