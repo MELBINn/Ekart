@@ -3,13 +3,14 @@ import Layout from "./../components/Layout/Layout";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Checkbox, Radio } from "antd";
+import { useAuth } from "../context/auth";
 import { Prices } from "../components/Prices";
 import { Url } from "../url";
-import { useCart } from "../context/cart";
+// import { useCart } from "../context/cart";
 import toast from "react-hot-toast";
 const HomePage = () => {
   const navigate = useNavigate();
-  const [cart, setCart] = useCart();
+  // const [cart, AddToCart] = useCart();
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [checked, setChecked] = useState([]);
@@ -17,8 +18,9 @@ const HomePage = () => {
   const [total, setTotal] = useState(0);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
+  const [auth, setAuth] = useAuth();
 
-  //get all cat
+  //get all category
   const getAllCategory = async () => {
     try {
       const { data } = await axios.get(Url+"/api/v1/category/get-category");
@@ -46,6 +48,7 @@ const HomePage = () => {
       console.log(error);
     }
   };
+ 
 
   //getTOtal COunt
   const getTotal = async () => {
@@ -104,6 +107,9 @@ const HomePage = () => {
       console.log(error);
     }
   };
+  const AddToCart = (productId)=>{
+    console.log(productId)
+  }
   return (
     <Layout title={"ALl Products - Best offers "}>
       <div className="container-fluid row mt-3">
@@ -161,23 +167,22 @@ const HomePage = () => {
                   >
                     More Details
                   </button>
-                  <button
-                    className="btn btn-secondary ms-1"
-                    onClick={() => {
-                      setCart([...cart, p]);
-                      localStorage.setItem(
-                        "cart",
-                        JSON.stringify([...cart, p])
-                      );
-                      toast.success("Item Added to cart");
-                    }}
-                  >
-                    ADD TO CART
-                  </button>
-                </div>
-              </div>
-            ))}
+                 {/* <button onClick={()=>AddToCart(p._id)}>Add To Cart</button> */}
+                 <button
+  className="btn btn-secondary ms-1"
+  onClick={() => {
+    const productId = p._id;
+    AddToCart(productId); // Log the product ID
+    toast.success("Item Added to cart");
+  }}
+>
+  Add To Cart
+</button>
+
           </div>
+          </div>
+            ))}
+            </div>
           <div className="m-2 p-3">
             {products && products.length < total && (
               <button

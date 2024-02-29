@@ -2,13 +2,13 @@ import React, { useState, useEffect } from "react";
 import Layout from "./../components/Layout/Layout";
 import axios from "axios";
 import { Url } from "../url";
-import { useCart } from "../context/cart";
+// import { useCart } from "../context/cart";
 import toast from "react-hot-toast";
 import { useParams, useNavigate } from "react-router-dom";
 const ProductDetails = () => {
   const params = useParams();
   const navigate = useNavigate();
-  const [cart, setCart] = useCart();
+  // const [cart, setCart] = useCart();
   const [product, setProduct] = useState({});
   const [relatedProducts, setRelatedProducts] = useState([]);
 
@@ -103,7 +103,7 @@ const ProductDetails = () => {
                   >
                     More Details
                   </button>
-                <button
+                {/* <button
                     className="btn btn-secondary ms-1"
                     onClick={() => {
                       setCart([...cart, p]);
@@ -115,7 +115,7 @@ const ProductDetails = () => {
                     }}
                   >
                     ADD TO CART
-                  </button>
+                  </button> */}
               </div>
             </div>
           ))}
