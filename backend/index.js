@@ -1,16 +1,29 @@
 import express from "express";
 import colors from "colors";
+import mongoose from "mongoose";
 import dotenv from "dotenv";
 import morgan from "morgan";
-import connectDB from "./config/db.js";
+// import connectDB from "./config/db.js";
 import authRoutes from "./routes/authRoute.js";
 import categoryRoutes from "./routes/categoryRoutes.js";
 import productRoutes from "./routes/productRoutes.js"
-import { cartRoutes } from "./routes/CartRoute.js";
+import  cartRoutes  from "./routes/CartRoute.js";
 import cors from "cors";
 
 //configure env
 dotenv.config();
+
+const connectDB = async () => {
+  try {
+    const conn = await mongoose.connect(process.env.MONGO_URL);
+    console.log(
+      `Conneted To Mongodb Databse ${conn.connection.host}`.bgMagenta.white
+    );
+  } catch (error) {
+    console.log(`Errro in Mongodb ${error}`.bgRed.white);
+  }
+};
+
 
 //databse config
 connectDB();
@@ -18,8 +31,15 @@ connectDB();
 //rest object
 const app = express();
 
+const corsOptions = {
+  origin: 'http://localhost:3000', 
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
+
 //middelwares
-app.use(cors());
+
 app.use(express.json());
 app.use(morgan("dev"));
 
@@ -27,7 +47,7 @@ app.use(morgan("dev"));
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/category", categoryRoutes);
 app.use("/api/v1/product", productRoutes);
-app.use("api/v1/cart",cartRoutes)
+app.use("/api/v1/cart", cartRoutes)
 
 //rest api
 app.get("/", (req, res) => {

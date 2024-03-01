@@ -117,8 +117,8 @@ const HomePage = () => {
     console.log(auth.user._id)
     const User = auth.user._id
     try{
-      const res=await axios.post(Url+"api/v1/cart/create",{product:productId,User:User}
-      ,{withCredentials:true})
+      const res=await axios.post(Url+"/api/v1/cart/create",{product:productId,User:User}
+      ,{withCredentials: true})
     }
     catch(err){
       console.error('Error in AddToCart:', err);
