@@ -20,6 +20,7 @@ const HomePage = () => {
   const [loading, setLoading] = useState(false);
   const [auth] = useAuth();
 
+  // const userId = auth.userId;
   //get all category
   const getAllCategory = async () => {
     try {
@@ -107,10 +108,21 @@ const HomePage = () => {
       console.log(error);
     }
   };
-  const AddToCart = (productId)=>{
-    console.log(productId)
-    console.log(auth._userId);
+
+  const AddToCart = async (productId)=>{
+    // console.log(productId)
+    //add user and product id
+    // console.log(userId);
     console.log(auth.user)
+    console.log(auth.user._id)
+    const User = auth.user._id
+    try{
+      const res=await axios.post(Url+"api/v1/cart/create",{product:productId,User:User}
+      ,{withCredentials:true})
+    }
+    catch(err){
+      console.error('Error in AddToCart:', err);
+    }
   }
   return (
     <Layout title={"ALl Products - Best offers "}>

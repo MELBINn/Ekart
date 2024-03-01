@@ -11,6 +11,16 @@ const AuthProvider = ({ children }) => {
 
   //default axios
   axios.defaults.headers.common["Authorization"] = auth?.token;
+ //check blogapp createpost page
+  // const handleCreate=async (e)=>{
+  //   e.preventDefault()
+  //   const post={
+  //     title,
+  //     desc,
+  //     username:user.username,
+  //     userId:user._id,
+  //     categories:cats
+  //   }
 
   useEffect(() => {
     const data = localStorage.getItem("auth");
@@ -20,7 +30,7 @@ const AuthProvider = ({ children }) => {
         ...auth,
         user: parseData.user,
         token: parseData.token,
-        userId: parseData._id,
+        userId: parseData._userId,
       });
     }
     //eslint-disable-next-line
