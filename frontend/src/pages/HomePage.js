@@ -109,15 +109,20 @@ const HomePage = () => {
     }
   };
 
-  const AddToCart = async (productId)=>{
+  const AddToCart = async (productId,p)=>{
     // console.log(productId)
+    //console.log(p)
+    const name = p.name
+    const price = p.price
+    //console.log(price)
     //add user and product id
+    
     // console.log(userId);
-    console.log(auth.user)
-    console.log(auth.user._id)
+    // console.log(auth.user)
+    // console.log(auth.user._id)
     const User = auth.user._id
     try{
-      const res=await axios.post(Url+"/api/v1/cart/create",{product:productId,User:User}
+      const res=await axios.post(Url+"/api/v1/cart/create",{productid:productId,User:User,Name:name,Price:price}
       ,{withCredentials: true})
     }
     catch(err){
@@ -183,15 +188,16 @@ const HomePage = () => {
                   </button>
                  {/* <button onClick={()=>AddToCart(p._id)}>Add To Cart</button> */}
                  <button
-  className="btn btn-secondary ms-1"
-  onClick={() => {
-    const productId = p._id;
-    AddToCart(productId); // Log the product ID
-    toast.success("Item Added to cart");
-  }}
->
-  Add To Cart
-</button>
+                 className="btn btn-secondary ms-1"
+                 onClick={() => {
+                   //console.log(p)
+                   const productId = p._id;
+                   AddToCart(productId,p); // Log the product ID
+                   toast.success("Item Added to cart");
+                 }}
+               >
+                 Add To Cart
+               </button>
 
           </div>
           </div>

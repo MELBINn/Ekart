@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import Layout from "./../components/Layout/Layout";
- import { useCart } from "../context/cart";
+//  import { useCart } from "../context/cart";
 import { useAuth } from "../context/auth";
 import { Url } from "../url";
+import axios from "axios";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 const CartPage = () => {
   const [auth, setAuth] = useAuth();
-  const [cart, setCart] = useCart();
+  const [cart, setCart] = useState();
   const navigate = useNavigate();
 
   //total price
@@ -24,19 +26,42 @@ const CartPage = () => {
       console.log(error);
     }
   };
-  //detele item
-  const removeCartItem = (pid) => {
+
+  
+  //get cart
+
+
+  const getAllCart = async () => {
     try {
-      let myCart = [...cart];
-      let index = myCart.findIndex((item) => item._id === pid);
-      myCart.splice(index, 1);
-      setCart(myCart);
-      localStorage.setItem("cart", JSON.stringify(myCart));
+      const { data } = await axios.get(Url+"/api/v1/cart/get-cart");
+      if (data?.success) {
+        console.log(data.productCart)
+        setCart(data.productCart);
+      }
     } catch (error) {
       console.log(error);
     }
   };
-  return (
+
+  useEffect(() => {
+    getAllCart()
+  }, []);
+
+
+   console.log(cart)
+  //detele item
+  // const removeCartItem = (pid) => {
+  //   try {
+  //     let myCart = [...cart];
+  //     let index = myCart.findIndex((item) => item._id === pid);
+  //     myCart.splice(index, 1);
+  //     setCart(myCart);
+  //     localStorage.setItem("cart", JSON.stringify(myCart));
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+   return (
     <Layout>
       <div className="container">
         <div className="row">
@@ -59,7 +84,7 @@ const CartPage = () => {
               <div className="row mb-2 p-3 card flex-row">
                 <div className="col-md-4">
                   <img
-                    src={Url+`/api/v1/product/product-photo/${p._id}`}
+                    src={Url+`/api/v1/product/product-photo/${p.productId}`}
                     className="card-img-top"
                     alt={p.name}
                     width="100px"
@@ -68,11 +93,11 @@ const CartPage = () => {
                 </div>
                 <div className="col-md-8">
                   <p>{p.name}</p>
-                  <p>{p.description.substring(0, 30)}</p>
+                  {/* <p>{p.description.substring(0, 30)}</p> */}
                   <p>Price : {p.price}</p>
                   <button
                     className="btn btn-danger"
-                    onClick={() => removeCartItem(p._id)}
+                    // onClick={() => removeCartItem(p._id)}
                   >
                     Remove
                   </button>
@@ -126,6 +151,6 @@ const CartPage = () => {
       </div>
     </Layout>
   );
-};
+  };
 
 export default CartPage;
