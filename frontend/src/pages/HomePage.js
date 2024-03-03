@@ -6,11 +6,11 @@ import { Checkbox, Radio } from "antd";
 import { useAuth } from "../context/auth";
 import { Prices } from "../components/Prices";
 import { Url } from "../url";
-// import { useCart } from "../context/cart";
+import { useCart } from "../context/cart";
 import toast from "react-hot-toast";
 const HomePage = () => {
   const navigate = useNavigate();
-  // const [cart, AddToCart] = useCart();
+  const [cart, setCart] = useCart();
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [checked, setChecked] = useState([]);
@@ -112,18 +112,23 @@ const HomePage = () => {
   const AddToCart = async (productId,p)=>{
     // console.log(productId)
     //console.log(p)
-    const name = p.name
-    const price = p.price
+   
     //console.log(price)
     //add user and product id
     
     // console.log(userId);
     // console.log(auth.user)
-    // console.log(auth.user._id)
+    // // console.log(auth.user._id)
+    // const existingProduct = cart.find((item) => item.productId === productId);
+
+  
+    const name = p.name
+    const price = p.price
     const User = auth.user._id
     try{
       const res=await axios.post(Url+"/api/v1/cart/create",{productid:productId,User:User,Name:name,Price:price}
       ,{withCredentials: true})
+      toast.success("Item Added to cart");
     }
     catch(err){
       console.error('Error in AddToCart:', err);
@@ -193,7 +198,7 @@ const HomePage = () => {
                    //console.log(p)
                    const productId = p._id;
                    AddToCart(productId,p); // Log the product ID
-                   toast.success("Item Added to cart");
+                   
                  }}
                >
                  Add To Cart
