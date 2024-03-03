@@ -1,22 +1,35 @@
-// import { useState, useContext, createContext, useEffect } from "react";
+import { useState, useContext, createContext, useEffect } from "react";
+import axios from "axios";
+import { Url } from "../url";
 
-// const CartContext = createContext();
-// const CartProvider = ({ children }) => {
-//   const [cart, setCart] = useState([]);
+const CartContext = createContext();
+const CartProvider = ({ children }) => {
+  const [cart, setCart] = useState([]);
 
-//   useEffect(() => {
-//     let existingCartItem = localStorage.getItem("cart");
-//     if (existingCartItem) setCart(JSON.parse(existingCartItem));
-//   }, []);
+  const getAllCart = async () => {
+    try {
+      const { data } = await axios.get(Url+"/api/v1/cart/get-cart");
+      if (data?.success) {
+        console.log(data.productCart)
+        setCart(data.productCart);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-//   return (
-//     <CartContext.Provider value={[cart, setCart]}>
-//       {children}
-//     </CartContext.Provider>
-//   );
-// };
+  useEffect(() => {
+    getAllCart()
+  }, []);
 
-// // custom hook
-// const useCart = () => useContext(CartContext);
+  return (
+    <CartContext.Provider value={[cart, setCart]}>
+      {children}
+    </CartContext.Provider>
+  );
+};
 
-// export { useCart, CartProvider };
+// custom hook
+const useCart = () => useContext(CartContext);
+
+export { useCart, CartProvider };

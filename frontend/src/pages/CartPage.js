@@ -1,14 +1,12 @@
 import React, { useState } from "react";
 import Layout from "./../components/Layout/Layout";
-//  import { useCart } from "../context/cart";
+  import { useCart } from "../context/cart";
 import { useAuth } from "../context/auth";
 import { Url } from "../url";
-import axios from "axios";
-import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 const CartPage = () => {
-  const [auth, setAuth] = useAuth();
-  const [cart, setCart] = useState();
+  const [auth, setAuth] = useAuth(false);
+  const [cart, setCart] = useCart();
   const navigate = useNavigate();
 
   //total price
@@ -29,40 +27,23 @@ const CartPage = () => {
 
   
   //get cart
-
-
-  const getAllCart = async () => {
-    try {
-      const { data } = await axios.get(Url+"/api/v1/cart/get-cart");
-      if (data?.success) {
-        console.log(data.productCart)
-        setCart(data.productCart);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
-    getAllCart()
-  }, []);
-
-
-   console.log(cart)
+  console.log(cart)
   //detele item
-  // const removeCartItem = (pid) => {
-  //   try {
-  //     let myCart = [...cart];
-  //     let index = myCart.findIndex((item) => item._id === pid);
-  //     myCart.splice(index, 1);
-  //     setCart(myCart);
-  //     localStorage.setItem("cart", JSON.stringify(myCart));
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
+  
+    // const removeCartItem = (pid) => {
+    //   try {
+    //     const updatedCart = cart.filter((item) => item.pid !== productId);
+    //     setCart(updatedCart);
+    //     // Optionally, you can save the updatedCart to localStorage here
+    //   } catch (error) {
+    //     console.log(error);
+    //   }
+    // };
+    
+  
    return (
     <Layout>
+      {auth.token ?(
       <div className="container">
         <div className="row">
           <div className="col-md-12">
@@ -97,7 +78,7 @@ const CartPage = () => {
                   <p>Price : {p.price}</p>
                   <button
                     className="btn btn-danger"
-                    // onClick={() => removeCartItem(p._id)}
+                     onClick={() => removeCartItem(p._id)}
                   >
                     Remove
                   </button>
@@ -149,6 +130,9 @@ const CartPage = () => {
           </div>
         </div>
       </div>
+      ) :(
+        <h1>Login to access cart</h1>
+      )}
     </Layout>
   );
   };

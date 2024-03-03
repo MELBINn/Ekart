@@ -1,0 +1,48 @@
+import React, { useState } from 'react';
+
+const App = () => {
+  // Assuming you have a state to track user authentication status
+  const [isUserAuthenticated, setIsUserAuthenticated] = useState(false);
+
+  // Assuming you have a state to store the products in the cart
+  const [cartProducts, setCartProducts] = useState([]);
+
+  const handleLogin = () => {
+    setup the auth context import here
+    // Implement your login logic here, set isUserAuthenticated to true upon successful login
+    // For now, we'll just simulate a successful login
+    setIsUserAuthenticated(true);
+
+    // Also, fetch and set the cart products upon login
+    setCartProducts(fetchCartProducts());
+  };
+
+  const fetchCartProducts = () => {
+    // Simulating fetching cart products from your backend
+    return ['Product A', 'Product B', 'Product C'];
+  };
+
+  return (
+    <div>
+      {isUserAuthenticated ? (
+        // User is signed in, show the products in the cart
+        <div>
+          <h1>Your Cart</h1>
+          <ul>
+            {cartProducts.map((product, index) => (
+              <li key={index}>{product}</li>
+            ))}
+          </ul>
+        </div>
+      ) : (
+        // User is not signed in, prompt them to log in
+        <div>
+          <h1>Login to view your cart</h1>
+          <button onClick={handleLogin}>Login</button>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default App;
