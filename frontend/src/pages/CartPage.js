@@ -78,7 +78,7 @@ const CartPage = () => {
                   <p>Price : {p.price}</p>
                   <button
                     className="btn btn-danger"
-                     onClick={() => removeCartItem(p._id)}
+                     //onClick={() => removeCartItem(p._id)}
                   >
                     Remove
                   </button>
