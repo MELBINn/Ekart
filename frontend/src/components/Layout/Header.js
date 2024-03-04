@@ -131,7 +131,7 @@ const Header = () => {
                   </NavLink>
                 </Badge>
               </li>
-              {/* //count={cart?.length}  */}
+              {/* count={cart?.length}  */}
             </ul>
           </div>
         </div>
