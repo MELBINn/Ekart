@@ -1,0 +1,24 @@
+.card {
+    background-color: #fff;
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    padding: 2rem; /* Adjust padding as needed */
+    margin: 2rem auto; /* Center the card horizontally */
+  }
+  
+  .card {
+    display: flex; /* Make the div a flex container */
+    flex-direction: column; /* Arrange elements vertically */
+    align-items: flex-start; /* Align the start of each h3 to the left */
+  }
+  
+  .card {
+    margin-bottom: 1rem; /* Spacing between user information */
+    
+  }
+  .card h3{
+    font-size: 20px; 
+    font-family: "Open Sans", sans-serif;
+  }
+
+  

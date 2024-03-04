@@ -5,6 +5,7 @@ import { useAuth } from "../context/auth";
 import { Url } from "../url";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+//import "../styles/cartStyles.css"
 
 const CartPage = () => {
   const [auth, setAuth] = useAuth(false);
@@ -73,7 +74,7 @@ const CartPage = () => {
   return (
     <Layout>
       {auth.token ? (
-        <div className="container">
+        <div className="container cart-page">
           <div className="row">
             <div className="col-md-12">
               <h1 className="text-center bg-light p-2 mb-1">
@@ -91,14 +92,14 @@ const CartPage = () => {
           <div className="row">
             <div className="col-md-8">
               {cart?.map((p) => (
-                <div className="row mb-2 p-3 card flex-row">
+                <div className="row mb-2 p-3 card flex-row" key={p.productId}>
                   <div className="col-md-4">
                     <img
-                      src={Url + `/api/v1/product/product-photo/${p.productId}`}
+                      src={`${Url}/api/v1/product/product-photo/${p.productId}`}
                       className="card-img-top"
                       alt={p.name}
                       width="100px"
-                      height={"100px"}
+                      height="100px"
                     />
                   </div>
                   <div className="col-md-8">
@@ -146,9 +147,7 @@ const CartPage = () => {
                     <button
                       className="btn btn-outline-warning"
                       onClick={() =>
-                        navigate("/login", {
-                          state: "/cart",
-                        })
+                        navigate("/login", { state: "/cart" })
                       }
                     >
                       Plase Login to checkout

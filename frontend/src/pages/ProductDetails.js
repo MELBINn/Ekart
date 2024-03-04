@@ -48,29 +48,17 @@ const ProductDetails = () => {
             className="card-img-top"
             alt={product.name}
             height="300"
-            width={"350px"}
+            width="350px"
           />
         </div>
-        <div className="col-md-6 ">
+        <div className="col-md-6">
           <h1 className="text-center">Product Details</h1>
           <h6>Name : {product.name}</h6>
           <h6>Description : {product.description}</h6>
           <h6>Price : {product.price}</h6>
           <h6>Category : {product?.category?.name}</h6>
-          <button class="btn btn-secondary ms-1">ADD TO CART</button>
-          {/* <button
-                    className="btn btn-secondary ms-1"
-                    onClick={() => {
-                      setCart([...cart, p]);
-                      localStorage.setItem(
-                        "cart",
-                        JSON.stringify([...cart, p])
-                      );
-                      toast.success("Item Added to cart");
-                    }}
-                  >
-                    ADD TO CART
-                  </button> */}
+          <button className="btn btn-secondary ms-1">ADD TO CART</button>
+          {/* Add the second "ADD TO CART" button here if needed */}
         </div>
       </div>
       <hr />
@@ -81,41 +69,24 @@ const ProductDetails = () => {
         )}
         <div className="d-flex flex-wrap">
           {relatedProducts?.map((p) => (
-            <div className="card m-2" style={{ width: "18rem" }}>
+            <div className="card m-2 similar-products" key={p._id}>
               <img
                 src={Url+`/api/v1/product/product-photo/${p?._id}`}
                 className="card-img-top"
                 alt={p.name}
+                height={300} // Overridden by .similar-products-card-img-top
               />
               <div className="card-body">
                 <h5 className="card-title">{p.name}</h5>
                 <p className="card-text">{p.description.substring(0, 30)}...</p>
                 <p className="card-text"> $ {p.price}</p>
-                {/* <button
+                <button
                   className="btn btn-primary ms-1"
-                  onClick={() => navigate(Url+`/product/${p.slug}`)}
+                  onClick={() => navigate(`/product/${p.slug}`)}
                 >
                   More Details
-                </button> */}
-                <button
-                    className="btn btn-primary ms-1"
-                    onClick={() => navigate(`/product/${p.slug}`)}
-                  >
-                    More Details
-                  </button>
-                {/* <button
-                    className="btn btn-secondary ms-1"
-                    onClick={() => {
-                      setCart([...cart, p]);
-                      localStorage.setItem(
-                        "cart",
-                        JSON.stringify([...cart, p])
-                      );
-                      toast.success("Item Added to cart");
-                    }}
-                  >
-                    ADD TO CART
-                  </button> */}
+                </button>
+                {/* Add "ADD TO CART" button here if needed */}
               </div>
             </div>
           ))}
