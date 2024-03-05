@@ -135,7 +135,7 @@ const HomePage = () => {
     }
   }
   return (
-    <Layout title={"ALl Products - Best offers"}>
+    <Layout title={" Products - Best offers"}>
       <div className="container-fluid row mt-3">
         <div className="col-md-2">
           <h4 className="text-center">Filter By Category</h4>
