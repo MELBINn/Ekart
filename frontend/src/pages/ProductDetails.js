@@ -14,7 +14,6 @@ const ProductDetails = () => {
   const [relatedProducts, setRelatedProducts] = useState([]);
   const [auth] = useAuth();
   const [products, setProducts] = useState([]);
-  
 
   //inital details
   useEffect(() => {
@@ -77,15 +76,14 @@ const ProductDetails = () => {
           <h6>Price : {product.price}</h6>
           <h6>Category : {product?.category?.name}</h6>
 
-          
-            <button
-              // <button className="btn btn-secondary ms-1">ADD TO CART</button>
-              className="btn btn-secondary ms-1"
-              onClick={() => AddToCart(product._id, product)} // Pass the product object
-            >
-              Add To Cart
-            </button>
-          
+          <button
+            // <button className="btn btn-secondary ms-1">ADD TO CART</button>
+            className="btn btn-secondary ms-1"
+            onClick={() => AddToCart(product._id, product)} // Pass the product object as product because it is coming 
+           //from product state
+          >
+            Add To Cart
+          </button>
         </div>
       </div>
       <hr />

@@ -154,7 +154,8 @@ const HomePage = () => {
           <Radio.Group onChange={(e) => setRadio(e.target.value)}>
               {Prices?.map((p) => (
                 <div key={p._id}>
-                  <Radio value={p.array}>{p.name}</Radio>
+                  <Radio value={p.array}>{p.name}</Radio> 
+                  {/* taking p. as product got mapped */}
                 </div>
               ))}
                 </Radio.Group>
