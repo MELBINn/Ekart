@@ -119,7 +119,7 @@ const HomePage = () => {
     // console.log(userId);
     // console.log(auth.user)
     // // console.log(auth.user._id)
-    // const existingProduct = cart.find((item) => item.productId === productId);
+   
 
   
     const name = p.name
@@ -138,7 +138,7 @@ const HomePage = () => {
     <Layout title={" Products - Best offers"}>
       <div className="container-fluid row mt-3">
         <div className="col-md-2">
-          <h4 className="text-center">Filter By Category</h4>
+          <h4 className="text-center" style={{ fontFamily: 'YourDesiredFont, sans-serif' }}>Category</h4>
           <div className="d-flex flex-column">
             {categories?.map((c) => (
               <Checkbox
@@ -149,7 +149,7 @@ const HomePage = () => {
               </Checkbox>
             ))}
           </div>
-          <h4 className="text-center mt-4">Filter By Price</h4>
+          <h4 className="text-center mt-4" style={{ fontFamily: 'YourDesiredFont, sans-serif' }}> Price</h4>
           <div className="d-flex flex-column">
           <Radio.Group onChange={(e) => setRadio(e.target.value)}>
               {Prices?.map((p) => (
@@ -167,7 +167,7 @@ const HomePage = () => {
           </div>
         </div>
         <div className="col-md-9 offset-1">
-          <h1 className="home-page h1">All Products</h1>
+          <h1 className="home-page h1" style={{ fontFamily: 'YourDesiredFont, sans-serif' }}>All Products</h1>
           <div className="d-flex flex-wrap">
             {products?.map((p) => (
               <div className="card m-2 home-page card" style={{ width: "18rem" }} key={p._id}>
