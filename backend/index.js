@@ -48,8 +48,8 @@ app.use(cors(corsOptions));
 
 app.use(express.json());
 app.use(morgan("dev"));
-const buildPath = '../frontend/build'; 
-app.use(express.static(buildPath))
+
+app.use(express.static(path.join(process.cwd(), '../frontend/build')))
 
 //routes
 app.use("/api/v1/auth", authRoutes);
