@@ -10,7 +10,7 @@ const CartProvider = ({ children }) => {
     try {
       const { data } = await axios.get(Url+"/api/v1/cart/get-cart");
       if (data?.success) {
-        console.log(data.productCart)
+        //console.log(data.productCart)
         setCart(data.productCart);
       }
     } catch (error) {

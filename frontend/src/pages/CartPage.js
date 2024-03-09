@@ -5,7 +5,7 @@ import { useAuth } from "../context/auth";
 import { Url } from "../url";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-//import "../styles/cartStyles.css"
+import "../styles/cartStyles.css"
 
 const CartPage = () => {
   const [auth, setAuth] = useAuth(false);
@@ -29,7 +29,7 @@ const CartPage = () => {
   };
 
   //get cart
-  console.log(cart);
+  //console.log(cart);
   //because the page need to refres to add products after eact cart updation
   const getAllCart = async () => {
     try {
@@ -49,7 +49,7 @@ const CartPage = () => {
   //detele item
   const removeCartItem = async (proId) => {
     try {
-      console.log(proId);
+      //console.log(proId);
 
       const response = await axios.post(Url + "/api/v1/cart/remove-item", {
         productId: proId,
