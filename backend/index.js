@@ -10,6 +10,7 @@ import productRoutes from "./routes/productRoutes.js"
 import cartRoutes from "./routes/cartRoute.js";
 import cors from "cors";
 import path from "path";
+
 import { fileURLToPath } from 'url';
 
 
@@ -47,7 +48,7 @@ app.use(cors(corsOptions));
 
 app.use(express.json());
 app.use(morgan("dev"));
-app.use(express.static(path.join(__dirname, "../frontend/build")))
+app.use(express.static(path.join(__dirname, '../frontend/build')))
 
 //routes
 app.use("/api/v1/auth", authRoutes);
