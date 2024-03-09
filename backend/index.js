@@ -49,7 +49,7 @@ app.use(cors(corsOptions));
 app.use(express.json());
 app.use(morgan("dev"));
 
-app.use(express.static(path.join(process.cwd(), '../frontend/build')))
+app.use(express.static(path.join(__dirname, '../frontend/build')))
 
 //routes
 app.use("/api/v1/auth", authRoutes);
