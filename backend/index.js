@@ -1,4 +1,4 @@
-import express from "express";
+import express from "express";//use of es6
 import colors from "colors";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
@@ -9,6 +9,7 @@ import categoryRoutes from "./routes/categoryRoutes.js";
 import productRoutes from "./routes/productRoutes.js"
 import  cartRoutes  from "./routes/CartRoute.js";
 import cors from "cors";
+import path from "path";
 
 //configure env
 dotenv.config();
@@ -42,6 +43,7 @@ app.use(cors(corsOptions));
 
 app.use(express.json());
 app.use(morgan("dev"));
+app.use(express.static(path.join(__dirname, '../frontend/build')))
 
 //routes
 app.use("/api/v1/auth", authRoutes);
@@ -50,9 +52,12 @@ app.use("/api/v1/product", productRoutes);
 app.use("/api/v1/cart", cartRoutes)
 
 //rest api
-app.get("/", (req, res) => {
-  res.send("<h1>Welcome to ecommerce app</h1>");
-});
+// app.get("/", (req, res) => {
+//   res.send("<h1>Welcome to ecommerce app</h1>");
+// });
+app.use('*',function(req,res){
+  res.sendFile(path.join(__dirname, '../frontend/build/index.html'));
+})
 
 //PORT
 const PORT = process.env.PORT || 8080;
