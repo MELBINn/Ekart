@@ -7,7 +7,7 @@ import morgan from "morgan";
 import authRoutes from "./routes/authRoute.js";
 import categoryRoutes from "./routes/categoryRoutes.js";
 import productRoutes from "./routes/productRoutes.js"
-import  cartRoutes  from "./routes/CartRoute.js";
+import cartRoutes from "./routes/cartRoute.js";
 import cors from "cors";
 import path from "path";
 import { fileURLToPath } from 'url';
