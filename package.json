@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "start": "node backend/index.js",
-    "dev": "npm run start"
+    "dev": "npm run start",
+    "build": "npm i"
   },
   "keywords": [],
   "author": "",
