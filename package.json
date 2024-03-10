@@ -5,9 +5,9 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "node backend/index.js",
+    "start": "node index.js",
     "dev": "npm run start",
-    "build": "npm i"
+    "build": "npm run build"
   },
   "keywords": [],
   "author": "",
